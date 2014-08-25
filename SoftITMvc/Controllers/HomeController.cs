@@ -9,33 +9,25 @@ namespace SoftITMvc.Controllers
 {
     public class HomeController : Controller
     {
-        public ProjectModelEntities Entities { get; set; }
+        public ApplicationDbContext Context { get; set; }
+
 
         public HomeController()
         {
-            Entities = new ProjectModelEntities();
+            Context = new ApplicationDbContext();
         }
+
 
         public ActionResult Index()
         {
-            var shortProjectList = new List<ShortProjectVeiwModel>();
+            var projects = new List<ShortProjectViewModel>();
 
-            foreach (var project in Entities.ProjectSet)
+            foreach (var project in Context.Projects)
             {
-                if (project.State == ProjectState.Ready)
-                {
-                    var shortProject = new ShortProjectVeiwModel()
-                    {
-                        Name = project.Name,
-                        Description = project.Description,
-                        Logo = project.Logo
-                    };
-
-                    shortProjectList.Add(shortProject);
-                }
+                projects.Add(new ShortProjectViewModel(project.Name, project.Description, project.Logo, project.Size));
             }
 
-            return View(shortProjectList);
+            return View(projects);
         }
 
         public ActionResult About()

@@ -10,21 +10,11 @@
 namespace SoftITMvc.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Employee
+    public enum LogoSize : int
     {
-        public Employee()
-        {
-            this.Projects = new HashSet<Project>();
-        }
-    
-        public int EmployeeId { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string Skype { get; set; }
-        public string Tel { get; set; }
-    
-        public virtual ICollection<Project> Projects { get; set; }
+        Small = 0,
+        Medium = 1,
+        Wide = 2
     }
 }

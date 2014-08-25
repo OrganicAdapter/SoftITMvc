@@ -29,5 +29,9 @@ namespace SoftITMvc.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<SoftITMvc.Models.Employee> Employees { get; set; }
+
+        public System.Data.Entity.DbSet<SoftITMvc.Models.Project> Projects { get; set; }
     }
 }

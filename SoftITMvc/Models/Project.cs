@@ -22,15 +22,14 @@ namespace SoftITMvc.Models
         public int ProjectId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public short Price { get; set; }
         public string Logo { get; set; }
-        public ProjectState State { get; set; }
-        public string Rating { get; set; }
-        public string Deadline { get; set; }
         public int ProcurerId { get; set; }
+        public LogoSize Size { get; set; }
+        public ProjectState State { get; set; }
+        public string Deadline { get; set; }
         public int EmployeeId { get; set; }
     
-        public virtual ICollection<Workflow> Workflows { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual ICollection<Workflow> Workflows { get; set; }
     }
 }

@@ -1,14 +1,21 @@
-﻿@model IEnumerable<SoftITMvc.Models.ShortProjectVeiwModel>
+﻿@model IEnumerable<SoftITMvc.Models.ShortProjectViewModel>
 
 @{
     ViewBag.Title = "Kezdőlap";
 }
 
-<ul>
-    @foreach (var project in Model) 
-    { 
-        <li>
-            @Html.DisplayFor(modelItem => project.Name)
-        </li>
-    }
-</ul>
+<div>
+    <p> Ez itt egy nagyon durva leírás arról, hogy mit csinálunk és kik vagyunk.</p>
+</div>
+
+<div>
+    <ul>
+        @foreach (var project in Model)
+        { 
+            <li>
+                <img src="@project.Logo" width="100" height="100" />
+                @Html.DisplayFor((x) => project.Name)
+            </li>
+        }
+    </ul>
+</div>

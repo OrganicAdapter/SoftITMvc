@@ -1,0 +1,145 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<!-- EF Runtime content -->
+<edmx:Runtime>
+<!-- SSDL content -->
+<edmx:StorageModels>
+<Schema Namespace="SoftITDbModelModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SoftITDbModelModelStoreContainer">
+    <EntitySet Name="EmployeeSet" EntityType="SoftITDbModelModel.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="EmployeeSet">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" />
+    <Property Name="Skype" Type="nvarchar" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+<!-- CSDL content -->
+<edmx:ConceptualModels>
+<Schema Namespace="SoftITDbModelModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SoftITDbModelEntities" p1:LazyLoadingEnabled="true" >
+          <EntitySet Name="EmployeeSet" EntityType="SoftITDbModelModel.Employee" />
+          <EntitySet Name="ProjectSet" EntityType="SoftITDbModelModel.Project" />
+          <EntitySet Name="WorkflowSet" EntityType="SoftITDbModelModel.Workflow" />
+          <AssociationSet Name="EmployeeProject" Association="SoftITDbModelModel.EmployeeProject">
+            <End Role="Employee" EntitySet="EmployeeSet" />
+            <End Role="Project" EntitySet="ProjectSet" />
+          </AssociationSet>
+          <AssociationSet Name="WorkflowProject" Association="SoftITDbModelModel.WorkflowProject">
+            <End Role="Workflow" EntitySet="WorkflowSet" />
+            <End Role="Project" EntitySet="ProjectSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Skype" Type="String" Nullable="true" />
+          <Property Name="Tel" Type="String" Nullable="true" />
+          <NavigationProperty Name="Projects" Relationship="SoftITDbModelModel.EmployeeProject" FromRole="Employee" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Logo" Type="String" Nullable="false" />
+          <Property Name="ProcurerId" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="SoftITDbModelModel.LogoSize" Nullable="false" />
+          <Property Name="State" Type="SoftITDbModelModel.ProjectState" Nullable="false" />
+          <Property Name="Deadline" Type="String" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="SoftITDbModelModel.EmployeeProject" FromRole="Project" ToRole="Employee" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Workflows" Relationship="SoftITDbModelModel.WorkflowProject" FromRole="Project" ToRole="Workflow" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="SoftITDbModelModel.WorkflowProject" FromRole="Workflow" ToRole="Project" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EmployeeProject">
+          <End Type="SoftITDbModelModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="SoftITDbModelModel.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WorkflowProject">
+          <End Type="SoftITDbModelModel.Workflow" Role="Workflow" Multiplicity="*" />
+          <End Type="SoftITDbModelModel.Project" Role="Project" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Workflow">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ProjectState">
+          <Member Name="WaitingForApproval" />
+          <Member Name="WaitingForBet" />
+          <Member Name="InProggress" />
+          <Member Name="Beta" />
+          <Member Name="Ready" />
+          <Member Name="Terminated" />
+          <Member Name="Finished" />
+        </EnumType>
+        <EnumType Name="LogoSize">
+          <Member Name="Small" />
+          <Member Name="Medium" />
+          <Member Name="Wide" />
+        </EnumType>
+</Schema>
+</edmx:ConceptualModels>
+<!-- C-S mapping content -->
+<edmx:Mappings>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SoftITDbModelModelStoreContainer" CdmEntityContainer="SoftITDbModelEntities">
+    <EntitySetMapping Name="EmployeeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(SoftITDbModelModel.Employee)">
+        <MappingFragment StoreEntitySet="EmployeeSet">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Skype" ColumnName="Skype" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+</edmx:Runtime>
+<!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+<edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+<Connection><DesignerInfoPropertySet><DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" /></DesignerInfoPropertySet></Connection>
+<edmx:Options><DesignerInfoPropertySet><DesignerProperty Name="ValidateOnBuild" Value="True" /><DesignerProperty Name="EnablePluralization" Value="False" /><DesignerProperty Name="IncludeForeignKeysInModel" Value="True" /><DesignerProperty Name="UseLegacyProvider" Value="False" /><DesignerProperty Name="CodeGenerationStrategy" Value="None" /></DesignerInfoPropertySet></edmx:Options>
+<edmx:Diagrams >
+      <Diagram DiagramId="d4a38e1d467c4b048e735dd6bda600fc" Name="Diagram1" >
+        <EntityTypeShape EntityType="SoftITDbModelModel.Employee" Width="1.5" PointX="3.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SoftITDbModelModel.Project" Width="1.5" PointX="5.75" PointY="1.25" />
+        <EntityTypeShape EntityType="SoftITDbModelModel.Workflow" Width="1.5" PointX="7.75" PointY="1.25" />
+        <AssociationConnector Association="SoftITDbModelModel.EmployeeProject" />
+        <AssociationConnector Association="SoftITDbModelModel.WorkflowProject" />
+      </Diagram>
+    </edmx:Diagrams>
+</edmx:Designer></edmx:Edmx>

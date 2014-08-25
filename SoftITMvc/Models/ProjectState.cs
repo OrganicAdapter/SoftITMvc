@@ -13,8 +13,12 @@ namespace SoftITMvc.Models
     
     public enum ProjectState : int
     {
-        Ongoing = 0,
-        Waiting = 1,
-        Ready = 2
+        WaitingForApproval = 0,
+        WaitingForBet = 1,
+        InProggress = 2,
+        Beta = 3,
+        Ready = 4,
+        Terminated = 5,
+        Finished = 6
     }
 }
