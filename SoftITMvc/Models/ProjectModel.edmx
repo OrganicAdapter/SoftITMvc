@@ -1,0 +1,215 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<!-- EF Runtime content -->
+<edmx:Runtime>
+<!-- SSDL content -->
+<edmx:StorageModels>
+<Schema Namespace="ProjectModelModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ProjectModelModelStoreContainer">
+    <EntitySet Name="ProjectSet" EntityType="ProjectModelModel.Store.ProjectSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WorkflowSet" EntityType="ProjectModelModel.Store.WorkflowSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeSet" EntityType="ProjectModelModel.Store.EmployeeSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ProjectWorkflow" Association="ProjectModelModel.Store.ProjectWorkflow">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Workflow" EntitySet="WorkflowSet" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectEmployee" Association="ProjectModelModel.Store.ProjectEmployee">
+      <End Role="Project" EntitySet="ProjectSet" />
+      <End Role="Employee" EntitySet="EmployeeSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ProjectSet">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="Price" Type="smallint" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar" Nullable="false" />
+    <Property Name="State" Type="int" Nullable="false" />
+    <Property Name="Rating" Type="nvarchar" Nullable="true" />
+    <Property Name="Deadline" Type="nvarchar" Nullable="false" />
+    <Property Name="ProcurerId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkflowSet">
+    <Key>
+      <PropertyRef Name="WorkflowId" />
+    </Key>
+    <Property Name="WorkflowId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Date" Type="nvarchar" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmployeeSet">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <Association Name="ProjectWorkflow">
+    <End Role="Project" Type="ProjectModelModel.Store.ProjectSet" Multiplicity="1" />
+    <End Role="Workflow" Type="ProjectModelModel.Store.WorkflowSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ProjectId" />
+      </Principal>
+      <Dependent Role="Workflow">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectEmployee">
+    <End Role="Project" Type="ProjectModelModel.Store.ProjectSet" Multiplicity="*" />
+    <End Role="Employee" Type="ProjectModelModel.Store.EmployeeSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+<!-- CSDL content -->
+<edmx:ConceptualModels>
+<Schema Namespace="ProjectModelModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ProjectModelEntities" p1:LazyLoadingEnabled="true" >
+          <EntitySet Name="ProjectSet" EntityType="ProjectModelModel.Project" />
+          <EntitySet Name="WorkflowSet" EntityType="ProjectModelModel.Workflow" />
+          <AssociationSet Name="ProjectWorkflow" Association="ProjectModelModel.ProjectWorkflow">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="Workflow" EntitySet="WorkflowSet" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeSet" EntityType="ProjectModelModel.Employee" />
+          <AssociationSet Name="ProjectEmployee" Association="ProjectModelModel.ProjectEmployee">
+            <End Role="Project" EntitySet="ProjectSet" />
+            <End Role="Employee" EntitySet="EmployeeSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Int16" Nullable="false" />
+          <Property Name="Logo" Type="String" Nullable="false" />
+          <Property Name="State" Type="ProjectModelModel.ProjectState" Nullable="false" />
+          <Property Name="Rating" Type="String" Nullable="true" />
+          <Property Name="Deadline" Type="String" Nullable="false" />
+          <Property Name="ProcurerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Workflows" Relationship="ProjectModelModel.ProjectWorkflow" FromRole="Project" ToRole="Workflow" />
+          <NavigationProperty Name="Employee" Relationship="ProjectModelModel.ProjectEmployee" FromRole="Project" ToRole="Employee" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="ProjectModelModel.ProjectWorkflow" FromRole="Workflow" ToRole="Project" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ProjectWorkflow">
+          <End Type="ProjectModelModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="ProjectModelModel.Workflow" Role="Workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ProjectId" />
+            </Principal>
+            <Dependent Role="Workflow">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ProjectState">
+          <Member Name="Ongoing" />
+          <Member Name="Waiting" />
+          <Member Name="Ready" />
+        </EnumType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <NavigationProperty Name="Projects" Relationship="ProjectModelModel.ProjectEmployee" FromRole="Employee" ToRole="Project" />
+        </EntityType>
+        <Association Name="ProjectEmployee">
+          <End Type="ProjectModelModel.Project" Role="Project" Multiplicity="*" />
+          <End Type="ProjectModelModel.Employee" Role="Employee" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+</Schema>
+</edmx:ConceptualModels>
+<!-- C-S mapping content -->
+<edmx:Mappings>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectModelModelStoreContainer" CdmEntityContainer="ProjectModelEntities">
+    <EntitySetMapping Name="ProjectSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectModelModel.Project)">
+        <MappingFragment StoreEntitySet="ProjectSet">
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="ProcurerId" ColumnName="ProcurerId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkflowSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectModelModel.Workflow)">
+        <MappingFragment StoreEntitySet="WorkflowSet">
+          <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeSet">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectModelModel.Employee)">
+        <MappingFragment StoreEntitySet="EmployeeSet">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+</edmx:Runtime>
+<!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+<edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+<Connection><DesignerInfoPropertySet><DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" /></DesignerInfoPropertySet></Connection>
+<edmx:Options><DesignerInfoPropertySet><DesignerProperty Name="ValidateOnBuild" Value="True" /><DesignerProperty Name="EnablePluralization" Value="False" /><DesignerProperty Name="IncludeForeignKeysInModel" Value="True" /><DesignerProperty Name="UseLegacyProvider" Value="False" /><DesignerProperty Name="CodeGenerationStrategy" Value="None" /></DesignerInfoPropertySet></edmx:Options>
+<edmx:Diagrams >
+      <Diagram DiagramId="732275b5ebf9412aa41f89a474f347e6" Name="Diagram1" >
+        <EntityTypeShape EntityType="ProjectModelModel.Project" Width="1.5" PointX="4.75" PointY="2" />
+        <EntityTypeShape EntityType="ProjectModelModel.Workflow" Width="1.5" PointX="7" PointY="2" />
+        <AssociationConnector Association="ProjectModelModel.ProjectWorkflow" />
+        <EntityTypeShape EntityType="ProjectModelModel.Employee" Width="1.5" PointX="2.125" PointY="2" />
+        <AssociationConnector Association="ProjectModelModel.ProjectEmployee" />
+      </Diagram>
+    </edmx:Diagrams>
+</edmx:Designer></edmx:Edmx>

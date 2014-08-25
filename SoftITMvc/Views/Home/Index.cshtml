@@ -1,7 +1,14 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<SoftITMvc.Models.ShortProjectVeiwModel>
+
+@{
+    ViewBag.Title = "Kezdőlap";
 }
 
-<div>
-    <img src="../../Content/themes/base/SoftIT_Base.png" alt="SoftIT_Base" />
-</div>
+<ul>
+    @foreach (var project in Model) 
+    { 
+        <li>
+            @Html.DisplayFor(modelItem => project.Name)
+        </li>
+    }
+</ul>
