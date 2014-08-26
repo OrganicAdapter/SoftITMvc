@@ -9,29 +9,40 @@
 
 </head>
 <body>
-    <div>
-        <div>
-            <img src="~/Content/Images/Logo_1000x1000.png" height="100" />
+    <div id="header">
+        <div id="logo">
+            <img src="~/Content/Images/Logo_1000x1000.png" />
         </div>
-        <div>
+        <div id="login">
+            @Html.Partial("_LoginPartial")
+        </div>
+        <div id="menu">
             <ul>
                 <li>@Html.ActionLink("Kezdőlap", "Index", "Home")</li>
                 <li>@Html.ActionLink("Kapcsolat", "Contact", "Home")</li>
                 <li>@Html.ActionLink("Rendelés", "About", "Home")</li>
-                <li>@Html.ActionLink("Projektjeim", "About", "Home")</li>
-                <li>@Html.ActionLink("Alkalmazottak", "About", "Home")</li>
-                <li>@Html.ActionLink("Projektek", "About", "Home")</li>
+                
+                @if (Request.IsAuthenticated)
+                { 
+                    <li>@Html.ActionLink("Projektjeim", "About", "Home")</li>
+                    
+                    if (User.IsInRole("Admin"))
+                    { 
+                        <li>@Html.ActionLink("Alkalmazottak", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Projektek", "Index", "Projects")</li>
+                    }
+                }
             </ul>
-            @Html.Partial("_LoginPartial")
         </div>
     </div>
-    <div>
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - SoftIT Bt.</p>
-        </footer>
+    <div id="body">
+        <div id="innerbody">
+            @RenderBody()
+        </div>
     </div>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - SoftIT</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

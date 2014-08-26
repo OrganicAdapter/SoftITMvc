@@ -1,24 +1,124 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿#header {
+    clear: both;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#logo {
+    float: left;
+    clear: left;
+    margin-left: 4%;
+    margin-top: 1%;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+#logo img{
+    width: 50%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#login {
+    float: right;
+    clear: right;
+    vertical-align: top;
+    margin-top: 1%;
+    margin-right: 5%;
+}
+
+#menu{
+    float: left;
+    clear: both;
+    width: 100%;
+    margin-left: 0px;
+}
+
+    #menu ul{
+        float: left;
+        width: 100%;
+        margin-left: 0px;
+        list-style-type: none;
+    }
+
+        #menu li{
+            float: left;
+            display: table;
+            background-color: #8cc63f;
+            height: 50px;
+            width: 150px;
+            margin-left: 1%;
+            margin-right: 1%;
+            margin-top: 1%;
+        }
+
+            #menu li:hover {
+                background-color: #25aae1;
+            }
+
+                #menu li a {
+                    color: white;
+                    display: table-cell;
+                    text-decoration: none;
+                    font-size: x-large;
+                    font-weight: bold;
+                    vertical-align: bottom;
+                }
+
+#body {
+    float: left;
+    clear: both;
+    width: 100%;
+    height: auto;
+    vertical-align:top;
+    margin-top: 20px;
+    background-color: #25aae1;
+}
+
+#innerbody {
+    margin-left: 3%;
+    margin-right: 5%;
+}
+
+h1 {
+    color: white;
+    font-weight: bold;
+    margin: 1%;
+}
+
+.text {
+    margin: 2%;
+}
+
+p {
+    color: white;
+    font-size: medium;
+}
+
+#projects {
+    width: 100%;
+}
+
+    #projects ul {
+        list-style-type: none;
+        float: left;
+        width: 100%;
+    }
+
+        #projects ul li {
+            float: left;
+            display: table;
+            margin: 1%;
+            background-color: #8cc63f;
+            padding: 5px;
+        }
+
+#imagename {
+    color: white;
+    font-weight: bold;
+}
+
+footer {
+    float: left;
+    width: 100%;
+    background-color: #25aae1;
+    margin-top: 1%;
+    padding-left: 5%;
 }

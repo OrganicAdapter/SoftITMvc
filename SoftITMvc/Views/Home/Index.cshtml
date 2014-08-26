@@ -4,17 +4,23 @@
     ViewBag.Title = "Kezdőlap";
 }
 
-<div>
+<h1> Rólunk </h1>
+
+<div class="text">
     <p> Ez itt egy nagyon durva leírás arról, hogy mit csinálunk és kik vagyunk.</p>
 </div>
 
-<div>
+<h1> Referenciák </h1>
+
+<div id="projects">
     <ul>
         @foreach (var project in Model)
-        { 
+        {
             <li>
                 <img src="@project.Logo" width="100" height="100" />
-                @Html.DisplayFor((x) => project.Name)
+                <div id="imagename">
+                    @Html.DisplayFor((x) => project.Name)
+                </div>
             </li>
         }
     </ul>
