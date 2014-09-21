@@ -28,5 +28,6 @@ namespace SoftITMvc.Models
         public virtual DbSet<Employee> EmployeeSet { get; set; }
         public virtual DbSet<Project> ProjectSet { get; set; }
         public virtual DbSet<Workflow> WorkflowSet { get; set; }
+        public virtual DbSet<Order> OrderSet { get; set; }
     }
 }

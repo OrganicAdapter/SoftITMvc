@@ -1,0 +1,65 @@
+﻿@model SoftITMvc.Models.Project
+
+@{
+    ViewBag.Title = "Részletek";
+}
+
+<h1> @Model.Name </h1>
+
+<img src="@Model.Logo"
+     width="105" height="105" />
+
+<div class="text">
+    <p>
+        @Model.Description
+    </p>
+@if (User.Identity.IsAuthenticated && User.Identity.Name == Model.ProcurerId)
+{
+    <p>
+        <strong> Ár: </strong> 
+        <br/> @Model.Price HUF
+        <br/>
+    </p>
+    <p>
+        <strong> Állapot: </strong>
+        <br /> @Model.State
+        <br />
+    </p>
+}
+</div>
+
+@if (Model.Rating != null && Model.Rating != "")
+{
+    <h2> Értékelés </h2>
+    
+    <div class="text">
+        <p>
+            @Model.Rating
+        </p>
+    </div>
+}
+
+@if (User.Identity.IsAuthenticated && User.Identity.Name == Model.ProcurerId && Model.State == SoftITMvc.Models.ProjectState.Finished)
+{
+    <h2> Értékelés írása / módosítása</h2>
+
+    using (Html.BeginForm())
+    { 
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(model => model.ProjectId)
+
+        <div class="multitext">
+            <div>
+                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <input type="submit" value="Mentés" class="btn btn-default" />
+            </div>
+        </div>
+    }
+}

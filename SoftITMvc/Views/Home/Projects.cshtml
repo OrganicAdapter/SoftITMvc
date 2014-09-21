@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SoftITMvc.Models.ShortProjectViewModel>
+
+@{
+    ViewBag.Title = "Projektjeim";
+}
+
+<h1> Projektjeim </h1>
+
+
+<div id="projects">
+    @if (Model.Count() != 0)
+    { 
+        <ul>
+            @foreach (var project in Model)
+            {
+                <li onclick="window.location.href='@Url.Action("Details", new { modelName = project.Name })'">
+                    <img src="@project.Logo"
+                         height="200"
+                         width="200" />
+                    <div id="imagename">
+                        @Html.DisplayFor((x) => project.Name)
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    { 
+        <div class="text">
+            <p>
+                Nagy itt az üresség...
+                <br /> Kattintson a "Megrendelés" gombra első rendelésének megkezdéséhez. Az ajánlatkérés és megbeszélés ingyenes!
+            </p>
+        </div>
+    }
+</div>

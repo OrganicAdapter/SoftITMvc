@@ -10,108 +10,108 @@ using SoftITMvc.Models;
 
 namespace SoftITMvc.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class EmployeesAdminController : Controller
+    [Authorize(Roles="Admin")]
+    public class OrdersAdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: EmployeesAdmin
+        // GET: OrdersAdmin
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            return View(db.Orders.ToList());
         }
 
-        // GET: EmployeesAdmin/Details/5
+        // GET: OrdersAdmin/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(order);
         }
 
-        // GET: EmployeesAdmin/Create
+        // GET: OrdersAdmin/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EmployeesAdmin/Create
+        // POST: OrdersAdmin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,FullName,Email,Skype,Tel")] Employee employee)
+        public ActionResult Create([Bind(Include = "OrderId,ProcurerId,Tel,ProcurerName,Description,Deadline,Remark,ProjectName")] Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
+                db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(employee);
+            return View(order);
         }
 
-        // GET: EmployeesAdmin/Edit/5
+        // GET: OrdersAdmin/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(order);
         }
 
-        // POST: EmployeesAdmin/Edit/5
+        // POST: OrdersAdmin/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,FullName,Email,Skype,Tel")] Employee employee)
+        public ActionResult Edit([Bind(Include = "OrderId,ProcurerId,Tel,ProcurerName,Description,Deadline,Remark,ProjectName")] Order order)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(employee);
+            return View(order);
         }
 
-        // GET: EmployeesAdmin/Delete/5
+        // GET: OrdersAdmin/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            Order order = db.Orders.Find(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(order);
         }
 
-        // POST: EmployeesAdmin/Delete/5
+        // POST: OrdersAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            Order order = db.Orders.Find(id);
+            db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

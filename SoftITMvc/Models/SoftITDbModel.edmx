@@ -33,6 +33,7 @@
             <End Role="Workflow" EntitySet="WorkflowSet" />
             <End Role="Project" EntitySet="ProjectSet" />
           </AssociationSet>
+          <EntitySet Name="OrderSet" EntityType="SoftITDbModelModel.Order" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -53,13 +54,15 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
           <Property Name="Logo" Type="String" Nullable="false" />
-          <Property Name="ProcurerId" Type="Int32" Nullable="false" />
+          <Property Name="ProcurerId" Type="String" Nullable="false" />
           <Property Name="Size" Type="SoftITDbModelModel.LogoSize" Nullable="false" />
           <Property Name="State" Type="SoftITDbModelModel.ProjectState" Nullable="false" />
           <Property Name="Deadline" Type="String" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="SoftITDbModelModel.EmployeeProject" FromRole="Project" ToRole="Employee" />
           <Property Name="EmployeeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Workflows" Relationship="SoftITDbModelModel.WorkflowProject" FromRole="Project" ToRole="Workflow" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="Workflow">
           <Key>
@@ -109,6 +112,19 @@
           <Member Name="Medium" />
           <Member Name="Wide" />
         </EnumType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcurerId" Type="String" Nullable="false" />
+          <Property Name="Tel" Type="String" Nullable="false" />
+          <Property Name="ProcurerName" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Deadline" Type="String" Nullable="false" />
+          <Property Name="Remark" Type="String" Nullable="false" />
+          <Property Name="ProjectName" Type="String" Nullable="false" />
+        </EntityType>
 </Schema>
 </edmx:ConceptualModels>
 <!-- C-S mapping content -->
@@ -140,6 +156,7 @@
         <EntityTypeShape EntityType="SoftITDbModelModel.Workflow" Width="1.5" PointX="7.75" PointY="1.25" />
         <AssociationConnector Association="SoftITDbModelModel.EmployeeProject" />
         <AssociationConnector Association="SoftITDbModelModel.WorkflowProject" />
+        <EntityTypeShape EntityType="SoftITDbModelModel.Order" Width="1.5" PointX="1.75" PointY="1.25" />
       </Diagram>
     </edmx:Diagrams>
 </edmx:Designer></edmx:Edmx>

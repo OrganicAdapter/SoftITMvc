@@ -10,7 +10,8 @@ namespace SoftITMvc.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Logo { get; set; }
-        public LogoSize Size { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
 
 
         public ShortProjectViewModel(string name, string description, string logo, LogoSize size)
@@ -18,7 +19,22 @@ namespace SoftITMvc.Models
             Name = name;
             Description = description;
             Logo = logo;
-            Size = size;
+
+            switch (size)
+            { 
+                case LogoSize.Small:
+                    Height = 50;
+                    Width = 50;
+                    break;
+                case LogoSize.Medium:
+                    Height = 105;
+                    Width = 105;
+                    break;
+                case LogoSize.Wide:
+                    Height = 215;
+                    Width = 215;
+                    break;
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ using SoftITMvc.Models;
 
 namespace SoftITMvc.Controllers
 {
+    [Authorize(Roles="Admin")]
     public class ProjectsAdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -48,7 +49,7 @@ namespace SoftITMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectId,Name,Description,Logo,ProcurerId,Size,State,Deadline,EmployeeId")] Project project)
+        public ActionResult Create([Bind(Include = "ProjectId,Name,Description,Logo,ProcurerId,Size,State,Deadline,EmployeeId,Price,Rating")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +83,7 @@ namespace SoftITMvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProjectId,Name,Description,Logo,ProcurerId,Size,State,Deadline,EmployeeId")] Project project)
+        public ActionResult Edit([Bind(Include = "ProjectId,Name,Description,Logo,ProcurerId,Size,State,Deadline,EmployeeId,Price,Rating")] Project project)
         {
             if (ModelState.IsValid)
             {

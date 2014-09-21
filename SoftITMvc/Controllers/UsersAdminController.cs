@@ -11,107 +11,107 @@ using SoftITMvc.Models;
 namespace SoftITMvc.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class EmployeesAdminController : Controller
+    public class UsersAdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: EmployeesAdmin
+        // GET: UsersAdmin
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            return View(db.Users.ToList());
         }
 
-        // GET: EmployeesAdmin/Details/5
-        public ActionResult Details(int? id)
+        // GET: UsersAdmin/Details/5
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(user);
         }
 
-        // GET: EmployeesAdmin/Create
+        // GET: UsersAdmin/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EmployeesAdmin/Create
+        // POST: UsersAdmin/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,FullName,Email,Skype,Tel")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Employees.Add(employee);
+                db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(employee);
+            return View(user);
         }
 
-        // GET: EmployeesAdmin/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: UsersAdmin/Edit/5
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(user);
         }
 
-        // POST: EmployeesAdmin/Edit/5
+        // POST: UsersAdmin/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,FullName,Email,Skype,Tel")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(employee);
+            return View(user);
         }
 
-        // GET: EmployeesAdmin/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: UsersAdmin/Delete/5
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            User user = db.Users.Find(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(employee);
+            return View(user);
         }
 
-        // POST: EmployeesAdmin/Delete/5
+        // POST: UsersAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

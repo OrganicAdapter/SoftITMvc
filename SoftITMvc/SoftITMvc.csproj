@@ -177,7 +177,10 @@
     <Compile Include="Controllers\EmployeesAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersAdminController.cs" />
     <Compile Include="Controllers\ProjectsAdminController.cs" />
+    <Compile Include="Controllers\StatementController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +193,9 @@
       <DependentUpon>SoftITDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>SoftITDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Project.cs">
       <DependentUpon>SoftITDbModel.tt</DependentUpon>
     </Compile>
@@ -223,6 +229,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\Logo_1000x1000.png" />
+    <Content Include="Content\Images\placeholder.png" />
+    <Content Include="Content\Images\sailor.png" />
+    <Content Include="Content\Images\uj_egyenlito.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -252,11 +261,26 @@
     <Content Include="Views\EmployeesAdmin\Details.cshtml" />
     <Content Include="Views\EmployeesAdmin\Edit.cshtml" />
     <Content Include="Views\EmployeesAdmin\Index.cshtml" />
+    <Content Include="Views\Account\RegisterAdmin.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Delete.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\ProjectsAdmin\Create.cshtml" />
     <Content Include="Views\ProjectsAdmin\Delete.cshtml" />
     <Content Include="Views\ProjectsAdmin\Details.cshtml" />
     <Content Include="Views\ProjectsAdmin\Edit.cshtml" />
     <Content Include="Views\ProjectsAdmin\Index.cshtml" />
+    <Content Include="Views\Home\Projects.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <None Include="Properties\PublishProfiles\AspHostPage.pubxml" />
+    <Content Include="Views\OrdersAdmin\Create.cshtml" />
+    <Content Include="Views\OrdersAdmin\Delete.cshtml" />
+    <Content Include="Views\OrdersAdmin\Details.cshtml" />
+    <Content Include="Views\OrdersAdmin\Edit.cshtml" />
+    <Content Include="Views\OrdersAdmin\Index.cshtml" />
+    <Content Include="Views\Statement\Simple.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -285,7 +309,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

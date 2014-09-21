@@ -69,6 +69,7 @@
     height: auto;
     vertical-align:top;
     margin-top: 20px;
+    padding-bottom: 20px;
     background-color: #25aae1;
 }
 
@@ -77,10 +78,14 @@
     margin-right: 5%;
 }
 
-h1 {
+h1, h2 {
     color: white;
     font-weight: bold;
     margin: 1%;
+}
+
+a {
+    color: #8cc63f;
 }
 
 .text {
@@ -105,10 +110,18 @@ p {
         #projects ul li {
             float: left;
             display: table;
-            margin: 1%;
+            margin: 5px;
             background-color: #8cc63f;
             padding: 5px;
         }
+
+            #projects ul li:hover {
+                background-color: white;
+            }
+
+                #projects ul li:hover #imagename {
+                    color: #8cc63f;
+                }
 
 #imagename {
     color: white;
@@ -121,4 +134,52 @@ footer {
     background-color: #25aae1;
     margin-top: 1%;
     padding-left: 5%;
+}
+
+.info {
+    float: left;
+    clear: both;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.infotext {
+    float: left;
+    clear: both;
+    width: 100%;
+    margin-left: 2%;
+}
+
+strong {
+    color: white;
+}
+
+.multitext {
+    float: left;
+    clear: both;
+    margin-left: 2%;
+}
+
+input {
+    float: left;
+    clear: right;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+iframe {
+    float: left;
+    clear: both;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+
+label {
+    float: left;
+    clear: left;
+    color: white;
+}
+
+#bigtext {
+    font-size: xx-large;
 }

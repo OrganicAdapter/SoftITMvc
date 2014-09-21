@@ -1,17 +1,28 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Kapcsolat";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<h1>@ViewBag.Title</h1>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="info">
+    <h2> Kizman Tamás </h2>
+    <div class="infotext">
+        <p> Ügyvezető igazgató </p>
+        <p> <a href="mailto:kizman.tamas@softit.hu">kizman.tamas@softit.hu</a></p>
+    </div>
+</div>
+
+<div class="info">
+    <h2> Simándi Gergely </h2>
+    <div class="infotext">
+        <p> Vezető fejlesztő </p>
+        <p> <a href="mailto:simandi.gergely@softit.hu">simandi.gergely@softit.hu</a></p>
+    </div>
+</div>
+
+<div class="info">
+    <address class="infotext">
+        <strong>Segítség kérés, hiba bejelentés:</strong>   <a href="mailto:support@softit.hu">support@softit.hu</a><br />
+        <strong>Információ:</strong> <a href="mailto:info@softit.hu">info@softit.hu</a>
+    </address>
+</div>

@@ -11,6 +11,7 @@ namespace SoftITMvc.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Employee
     {
@@ -20,9 +21,12 @@ namespace SoftITMvc.Models
         }
     
         public int EmployeeId { get; set; }
+        [Display(Name = "Név")]
         public string FullName { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Skype { get; set; }
+        [DataType(DataType.PhoneNumber)]
         public string Tel { get; set; }
     
         public virtual ICollection<Project> Projects { get; set; }
